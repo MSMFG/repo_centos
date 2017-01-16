@@ -99,14 +99,6 @@ class repo_centos (
   if $::operatingsystem == 'CentOS' {
     $releasever = $repo_centos::params::releasever
 
-    stage { 'repo_centos_clean':
-      before  => Stage['main'],
-    }
-
-    class { 'repo_centos::clean':
-      stage => repo_centos_clean,
-    }
-
     include repo_centos::base
     include repo_centos::contrib
     include repo_centos::cr
