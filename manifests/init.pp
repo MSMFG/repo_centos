@@ -78,6 +78,7 @@ class repo_centos (
     $ensure_fasttrack            = $repo_centos::params::ensure_fasttrack,
     $ensure_source               = $repo_centos::params::ensure_source,
     $ensure_debug                = $repo_centos::params::ensure_debug,
+    $stage                       = $repo_centos::params::stage,
   ) inherits repo_centos::params {
 
   validate_bool($enable_mirrorlist)
@@ -95,12 +96,13 @@ class repo_centos (
   validate_bool($enable_fasttrack)
   validate_bool($enable_source)
   validate_bool($enable_debug)
+  validate_string($stage)
 
   if $::operatingsystem == 'CentOS' {
     $releasever = $repo_centos::params::releasever
 
     stage { 'repo_centos_clean':
-      before  => Stage['main'],
+      before  => Stage[$stage],
     }
 
     class { 'repo_centos::clean':
