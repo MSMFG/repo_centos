@@ -96,7 +96,7 @@ class repo_centos (
   validate_bool($enable_fasttrack)
   validate_bool($enable_source)
   validate_bool($enable_debug)
-  validate_string($stage)
+  validate_string($stagename)
 
   if $::operatingsystem == 'CentOS' {
     $releasever = $repo_centos::params::releasever
